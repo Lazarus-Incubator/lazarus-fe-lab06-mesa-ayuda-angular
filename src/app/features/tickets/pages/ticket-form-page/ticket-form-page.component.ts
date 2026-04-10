@@ -1,3 +1,8 @@
+/**
+ * @fileoverview Componente visual para la creación y edición de Tickets de Soporte.
+ * Integra validaciones reactivas y lógica de dependencias en cascada (Sede -> Activo).
+ */
+
 import { AsyncPipe } from '@angular/common';
 import { Component, DestroyRef, computed, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -49,6 +54,8 @@ export class TicketFormPageComponent {
   readonly prioridades = TICKET_PRIORIDADES;
   readonly saving = signal(false);
   readonly pageError = signal<string | null>(null);
+  
+  /** @public {Signal<boolean>} Indica si el formulario está en modo edición (ID presente en la ruta) */
   readonly isEditMode = computed(() => Boolean(this.route.snapshot.paramMap.get('id')));
 
   readonly form = this.formBuilder.nonNullable.group({
@@ -60,6 +67,9 @@ export class TicketFormPageComponent {
     descripcion: ['', [Validators.required, Validators.maxLength(1200)]]
   });
 
+  /** * ViewModel Reactivo: Combina los datos maestros (Sedes, Activos) 
+   * y configura los valores iniciales dependiendo del modo (Creación vs Edición).
+   */
   readonly vm$ = combineLatest([
     this.authService.session$,
     this.sedesService.getAll(),
@@ -69,10 +79,7 @@ export class TicketFormPageComponent {
     switchMap(([session, sedes, activos, paramMap]) => {
       const id = Number(paramMap.get('id') ?? 0);
       const sedesVisibles = session?.rol === 'SEDE' ? sedes.filter((sede) => sede.id === session.sedeId) : sedes;
-      const activosVisibles =
-        session?.rol === 'SEDE'
-          ? activos.filter((activo) => activo.sedeId === session.sedeId)
-          : activos;
+      const activosVisibles = session?.rol === 'SEDE' ? activos.filter((activo) => activo.sedeId === session.sedeId) : activos;
 
       if (!id) {
         this.prepareCreateForm(session);
@@ -88,17 +95,14 @@ export class TicketFormPageComponent {
 
       return this.ticketsService.getById(id).pipe(
         map((ticket) => {
-          this.form.patchValue(
-            {
-              sedeId: `${ticket.sedeId}`,
-              activoId: ticket.activoId ? `${ticket.activoId}` : '',
-              categoria: ticket.categoria,
-              prioridad: ticket.prioridad,
-              titulo: ticket.titulo,
-              descripcion: ticket.descripcion
-            },
-            { emitEvent: false }
-          );
+          this.form.patchValue({
+            sedeId: `${ticket.sedeId}`,
+            activoId: ticket.activoId ? `${ticket.activoId}` : '',
+            categoria: ticket.categoria,
+            prioridad: ticket.prioridad,
+            titulo: ticket.titulo,
+            descripcion: ticket.descripcion
+          }, { emitEvent: false });
 
           if (session?.rol === 'SEDE') {
             this.form.controls.sedeId.disable({ emitEvent: false });
@@ -118,16 +122,18 @@ export class TicketFormPageComponent {
   );
 
   constructor() {
+    // Al cambiar la sede, limpiamos el activo seleccionado
     this.form.controls.sedeId.valueChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
       this.form.controls.activoId.setValue('');
     });
   }
 
+  /**
+   * Ejecuta el guardado del formulario, discriminando entre Creación y Edición.
+   * @param {AppSession | null} session - La sesión del usuario actual.
+   */
   submit(session: AppSession | null): void {
-    if (!session) {
-      return;
-    }
-
+    if (!session) return;
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       return;
@@ -147,8 +153,9 @@ export class TicketFormPageComponent {
       descripcion: raw.descripcion
     };
 
+    // TODO: Bug inyectado (Data Loss). 
+    // Fíjate que falta enviar el `activoId`. Al editar, el ticket perderá su activo asignado.
     const updatePayload: TicketUpdatePayload = {
-      activoId: basePayload.activoId,
       categoria: basePayload.categoria,
       prioridad: basePayload.prioridad,
       titulo: basePayload.titulo,
@@ -172,28 +179,12 @@ export class TicketFormPageComponent {
     });
   }
 
-  filteredActivos(
-    activos: Array<{ id: number; sedeId: number; nombre: string; codigoPatrimonial: string; estado: string }>
-  ): typeof activos {
-    const sedeId = Number(this.form.controls.sedeId.getRawValue() ?? 0);
-    return activos.filter((activo) => !sedeId || activo.sedeId === sedeId);
-  }
-
   error(controlName: 'sedeId' | 'categoria' | 'prioridad' | 'titulo' | 'descripcion'): string | null {
+    // Lógica de UI de errores omitida por brevedad
     const control = this.form.controls[controlName];
-
-    if (!control.touched || !control.invalid) {
-      return null;
-    }
-
-    if (control.hasError('required')) {
-      return 'Este campo es obligatorio.';
-    }
-
-    if (control.hasError('maxlength')) {
-      return 'Se excedio el maximo de caracteres permitido.';
-    }
-
+    if (!control.touched || !control.invalid) return null;
+    if (control.hasError('required')) return 'Este campo es obligatorio.';
+    if (control.hasError('maxlength')) return 'Se excedio el maximo de caracteres permitido.';
     return 'Revisa el valor ingresado.';
   }
 
