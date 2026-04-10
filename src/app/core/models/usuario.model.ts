@@ -1,3 +1,8 @@
+/**
+ * Usuario Model module.
+ *
+ * @remarks Provides the TypeScript implementation for `src/app/core/models/usuario.model.ts`.
+ */
 export type UsuarioRol = 'SEDE' | 'SOPORTE' | 'TECNICO' | 'ADMIN';
 
 export interface Usuario {

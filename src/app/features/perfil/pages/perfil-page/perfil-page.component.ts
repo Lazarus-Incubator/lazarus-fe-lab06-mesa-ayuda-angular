@@ -1,3 +1,8 @@
+/**
+ * Perfil Page Component module.
+ *
+ * @remarks Provides the TypeScript implementation for `src/app/features/perfil/pages/perfil-page/perfil-page.component.ts`.
+ */
 import { AsyncPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { combineLatest, map } from 'rxjs';

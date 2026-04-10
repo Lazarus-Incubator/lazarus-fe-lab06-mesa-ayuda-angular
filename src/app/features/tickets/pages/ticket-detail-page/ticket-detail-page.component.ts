@@ -1,3 +1,8 @@
+/**
+ * Ticket Detail Page Component module.
+ *
+ * @remarks Provides the TypeScript implementation for `src/app/features/tickets/pages/ticket-detail-page/ticket-detail-page.component.ts`.
+ */
 import { AsyncPipe, DatePipe } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, DestroyRef, inject, signal } from '@angular/core';

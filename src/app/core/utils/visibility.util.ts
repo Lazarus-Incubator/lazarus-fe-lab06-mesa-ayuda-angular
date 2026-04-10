@@ -1,3 +1,8 @@
+/**
+ * Visibility Util module.
+ *
+ * @remarks Provides the TypeScript implementation for `src/app/core/utils/visibility.util.ts`.
+ */
 import { ActivoTi } from '../models/activo-ti.model';
 import { AppSession } from '../models/app-session.model';
 import { TicketSoporte } from '../models/ticket-soporte.model';

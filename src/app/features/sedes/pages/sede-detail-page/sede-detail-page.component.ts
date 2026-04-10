@@ -1,3 +1,8 @@
+/**
+ * Sede Detail Page Component module.
+ *
+ * @remarks Provides the TypeScript implementation for `src/app/features/sedes/pages/sede-detail-page/sede-detail-page.component.ts`.
+ */
 import { AsyncPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';

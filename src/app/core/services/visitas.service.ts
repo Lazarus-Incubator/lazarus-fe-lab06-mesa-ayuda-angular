@@ -1,3 +1,8 @@
+/**
+ * Visitas Service module.
+ *
+ * @remarks Provides the TypeScript implementation for `src/app/core/services/visitas.service.ts`.
+ */
 import { inject, Injectable } from '@angular/core';
 import { forkJoin, Observable, switchMap, take, throwError } from 'rxjs';
 import { TicketSoporte } from '../models/ticket-soporte.model';

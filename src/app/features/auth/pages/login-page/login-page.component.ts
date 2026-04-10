@@ -1,3 +1,8 @@
+/**
+ * Login Page Component module.
+ *
+ * @remarks Provides the TypeScript implementation for `src/app/features/auth/pages/login-page/login-page.component.ts`.
+ */
 import { CommonModule } from '@angular/common';
 import { Component, DestroyRef, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';

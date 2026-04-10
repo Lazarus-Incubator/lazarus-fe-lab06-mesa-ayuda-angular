@@ -1,3 +1,8 @@
+/**
+ * Visita Detail Page Component module.
+ *
+ * @remarks Provides the TypeScript implementation for `src/app/features/visitas/pages/visita-detail-page/visita-detail-page.component.ts`.
+ */
 import { AsyncPipe, DatePipe } from '@angular/common';
 import { Component, DestroyRef, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';

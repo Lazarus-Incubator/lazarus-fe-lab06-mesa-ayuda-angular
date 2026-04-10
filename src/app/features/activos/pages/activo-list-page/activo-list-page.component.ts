@@ -1,3 +1,8 @@
+/**
+ * Activo List Page Component module.
+ *
+ * @remarks Provides the TypeScript implementation for `src/app/features/activos/pages/activo-list-page/activo-list-page.component.ts`.
+ */
 import { AsyncPipe, DatePipe } from '@angular/common';
 import { Component, DestroyRef, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';

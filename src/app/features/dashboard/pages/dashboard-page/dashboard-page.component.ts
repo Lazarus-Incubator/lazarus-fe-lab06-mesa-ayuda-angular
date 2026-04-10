@@ -1,3 +1,8 @@
+/**
+ * Dashboard Page Component module.
+ *
+ * @remarks Provides the TypeScript implementation for `src/app/features/dashboard/pages/dashboard-page/dashboard-page.component.ts`.
+ */
 import { Component, OnInit } from '@angular/core';
 import { forkJoin } from 'rxjs';
 import { finalize } from 'rxjs/operators';

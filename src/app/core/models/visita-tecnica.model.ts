@@ -1,3 +1,8 @@
+/**
+ * Visita Tecnica Model module.
+ *
+ * @remarks Provides the TypeScript implementation for `src/app/core/models/visita-tecnica.model.ts`.
+ */
 export type VisitaEstado = 'PROGRAMADA' | 'EN_CURSO' | 'FINALIZADA' | 'CANCELADA';
 
 export interface VisitaTecnica {

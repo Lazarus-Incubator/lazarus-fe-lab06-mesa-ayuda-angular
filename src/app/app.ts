@@ -1,3 +1,8 @@
+/**
+ * App module.
+ *
+ * @remarks Provides the TypeScript implementation for `src/app/app.ts`.
+ */
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 

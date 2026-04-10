@@ -1,3 +1,8 @@
+/**
+ * App Spec module.
+ *
+ * @remarks Provides the TypeScript implementation for `src/app/app.spec.ts`.
+ */
 import { TestBed } from '@angular/core/testing';
 import { App } from './app';
 

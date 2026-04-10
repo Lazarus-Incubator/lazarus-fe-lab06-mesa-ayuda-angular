@@ -1,3 +1,8 @@
+/**
+ * Tickets Service module.
+ *
+ * @remarks Provides the TypeScript implementation for `src/app/core/services/tickets.service.ts`.
+ */
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';

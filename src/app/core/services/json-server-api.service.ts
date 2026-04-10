@@ -1,3 +1,8 @@
+/**
+ * Json Server Api Service module.
+ *
+ * @remarks Provides the TypeScript implementation for `src/app/core/services/json-server-api.service.ts`.
+ */
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
