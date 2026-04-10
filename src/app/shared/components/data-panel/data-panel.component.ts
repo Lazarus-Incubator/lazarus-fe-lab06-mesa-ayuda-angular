@@ -1,3 +1,8 @@
+/**
+ * Data Panel Component module.
+ *
+ * @remarks Provides the TypeScript implementation for `src/app/shared/components/data-panel/data-panel.component.ts`.
+ */
 import { Component, input } from '@angular/core';
 
 @Component({

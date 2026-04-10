@@ -1,3 +1,8 @@
+/**
+ * Dashboard Model module.
+ *
+ * @remarks Provides the TypeScript implementation for `src/app/core/models/dashboard.model.ts`.
+ */
 export interface DashboardMetric {
   label: string;
   value: number;

@@ -1,3 +1,8 @@
+/**
+ * Ticket List Page Component module.
+ *
+ * @remarks Provides the TypeScript implementation for `src/app/features/tickets/pages/ticket-list-page/ticket-list-page.component.ts`.
+ */
 import { AsyncPipe, DatePipe } from '@angular/common';
 import { Component, DestroyRef, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';

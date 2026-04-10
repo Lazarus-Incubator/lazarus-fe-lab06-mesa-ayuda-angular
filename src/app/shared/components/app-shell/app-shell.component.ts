@@ -1,3 +1,8 @@
+/**
+ * App Shell Component module.
+ *
+ * @remarks Provides the TypeScript implementation for `src/app/shared/components/app-shell/app-shell.component.ts`.
+ */
 import { AsyncPipe } from '@angular/common';
 import { Component, computed, inject } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';

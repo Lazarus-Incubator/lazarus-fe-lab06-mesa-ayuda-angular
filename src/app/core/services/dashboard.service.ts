@@ -1,3 +1,8 @@
+/**
+ * Dashboard Service module.
+ *
+ * @remarks Provides the TypeScript implementation for `src/app/core/services/dashboard.service.ts`.
+ */
 import { inject, Injectable } from '@angular/core';
 import { combineLatest, map, Observable } from 'rxjs';
 import { DashboardBarDatum, DashboardMetric } from '../models/dashboard.model';

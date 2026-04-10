@@ -1,3 +1,8 @@
+/**
+ * Status Badge Component module.
+ *
+ * @remarks Provides the TypeScript implementation for `src/app/shared/components/status-badge/status-badge.component.ts`.
+ */
 import { Component, computed, input } from '@angular/core';
 import { EnumLabelPipe } from '../../pipes/enum-label.pipe';
 

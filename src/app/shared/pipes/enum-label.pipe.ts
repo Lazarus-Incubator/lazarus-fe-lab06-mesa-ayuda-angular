@@ -1,3 +1,8 @@
+/**
+ * Enum Label Pipe module.
+ *
+ * @remarks Provides the TypeScript implementation for `src/app/shared/pipes/enum-label.pipe.ts`.
+ */
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({

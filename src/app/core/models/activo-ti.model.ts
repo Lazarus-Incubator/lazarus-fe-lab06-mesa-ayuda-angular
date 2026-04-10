@@ -1,3 +1,8 @@
+/**
+ * Activo Ti Model module.
+ *
+ * @remarks Provides the TypeScript implementation for `src/app/core/models/activo-ti.model.ts`.
+ */
 export type ActivoTipo =
   | 'PC'
   | 'IMPRESORA'

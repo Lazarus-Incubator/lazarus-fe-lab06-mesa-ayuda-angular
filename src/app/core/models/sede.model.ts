@@ -1,3 +1,8 @@
+/**
+ * Sede Model module.
+ *
+ * @remarks Provides the TypeScript implementation for `src/app/core/models/sede.model.ts`.
+ */
 export type SedeEstado = 'ACTIVA' | 'INACTIVA' | 'SUSPENDIDA';
 
 export interface Sede {

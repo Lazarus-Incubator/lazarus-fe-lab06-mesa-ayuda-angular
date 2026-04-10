@@ -1,3 +1,8 @@
+/**
+ * Form Error Component module.
+ *
+ * @remarks Provides the TypeScript implementation for `src/app/shared/components/form-error/form-error.component.ts`.
+ */
 import { Component, input } from '@angular/core';
 
 @Component({

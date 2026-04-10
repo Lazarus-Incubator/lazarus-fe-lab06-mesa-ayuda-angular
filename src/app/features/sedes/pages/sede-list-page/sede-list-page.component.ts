@@ -1,3 +1,8 @@
+/**
+ * Sede List Page Component module.
+ *
+ * @remarks Provides the TypeScript implementation for `src/app/features/sedes/pages/sede-list-page/sede-list-page.component.ts`.
+ */
 import { AsyncPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';

@@ -1,3 +1,8 @@
+/**
+ * Activo Form Page Component module.
+ *
+ * @remarks Provides the TypeScript implementation for `src/app/features/activos/pages/activo-form-page/activo-form-page.component.ts`.
+ */
 import { AsyncPipe } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';

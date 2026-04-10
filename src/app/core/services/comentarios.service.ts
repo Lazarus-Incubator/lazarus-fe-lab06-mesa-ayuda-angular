@@ -1,3 +1,8 @@
+/**
+ * Comentarios Service module.
+ *
+ * @remarks Provides the TypeScript implementation for `src/app/core/services/comentarios.service.ts`.
+ */
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ComentarioCreatePayload, ComentarioTicket } from '../models/comentario-ticket.model';

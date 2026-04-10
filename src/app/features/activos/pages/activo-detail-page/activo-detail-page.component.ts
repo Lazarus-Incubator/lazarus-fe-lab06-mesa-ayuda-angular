@@ -1,3 +1,8 @@
+/**
+ * Activo Detail Page Component module.
+ *
+ * @remarks Provides the TypeScript implementation for `src/app/features/activos/pages/activo-detail-page/activo-detail-page.component.ts`.
+ */
 import { AsyncPipe, DatePipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';

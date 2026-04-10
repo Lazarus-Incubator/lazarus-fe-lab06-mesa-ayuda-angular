@@ -1,3 +1,8 @@
+/**
+ * Sedes Service module.
+ *
+ * @remarks Provides the TypeScript implementation for `src/app/core/services/sedes.service.ts`.
+ */
 import { inject, Injectable } from '@angular/core';
 import { Observable, switchMap, take } from 'rxjs';
 import { Sede } from '../models/sede.model';

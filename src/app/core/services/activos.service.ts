@@ -1,3 +1,8 @@
+/**
+ * Activos Service module.
+ *
+ * @remarks Provides the TypeScript implementation for `src/app/core/services/activos.service.ts`.
+ */
 import { inject, Injectable } from '@angular/core';
 import { Observable, switchMap, take } from 'rxjs';
 import { ActivoTi } from '../models/activo-ti.model';

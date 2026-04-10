@@ -1,3 +1,8 @@
+/**
+ * Auth Guard module.
+ *
+ * @remarks Provides the TypeScript implementation for `src/app/core/guards/auth.guard.ts`.
+ */
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';

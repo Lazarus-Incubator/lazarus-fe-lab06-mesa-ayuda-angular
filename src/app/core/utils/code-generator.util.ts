@@ -1,3 +1,8 @@
+/**
+ * Code Generator Util module.
+ *
+ * @remarks Provides the TypeScript implementation for `src/app/core/utils/code-generator.util.ts`.
+ */
 export function generateYearlyCode(prefix: string, existingCodes: string[], date = new Date()): string {
   const year = date.getFullYear();
   const regex = new RegExp(`^${prefix}-${year}-(\\d{4})$`);

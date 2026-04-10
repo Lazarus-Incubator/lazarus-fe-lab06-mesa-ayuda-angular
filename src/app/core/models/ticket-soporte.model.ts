@@ -1,3 +1,8 @@
+/**
+ * Ticket Soporte Model module.
+ *
+ * @remarks Provides the TypeScript implementation for `src/app/core/models/ticket-soporte.model.ts`.
+ */
 export type TicketCategoria =
   | 'HARDWARE'
   | 'SOFTWARE'

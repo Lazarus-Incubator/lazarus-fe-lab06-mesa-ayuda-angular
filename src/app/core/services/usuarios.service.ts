@@ -1,3 +1,8 @@
+/**
+ * Usuarios Service module.
+ *
+ * @remarks Provides the TypeScript implementation for `src/app/core/services/usuarios.service.ts`.
+ */
 import { inject, Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { Usuario } from '../models/usuario.model';

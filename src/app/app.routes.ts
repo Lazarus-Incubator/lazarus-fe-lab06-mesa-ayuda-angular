@@ -1,3 +1,8 @@
+/**
+ * App Routes module.
+ *
+ * @remarks Provides the TypeScript implementation for `src/app/app.routes.ts`.
+ */
 import { Routes } from '@angular/router';
 import { authGuard } from './core/guards/auth.guard';
 import { guestGuard } from './core/guards/guest.guard';
