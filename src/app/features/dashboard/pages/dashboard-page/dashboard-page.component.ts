@@ -1,41 +1,69 @@
-import { AsyncPipe, NgStyle } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { forkJoin } from 'rxjs';
+import { finalize } from 'rxjs/operators';
 import { DashboardService } from '../../../../core/services/dashboard.service';
-import { DataPanelComponent } from '../../../../shared/components/data-panel/data-panel.component';
-import { EmptyStateComponent } from '../../../../shared/components/empty-state/empty-state.component';
-import { LoadingStateComponent } from '../../../../shared/components/loading-state/loading-state.component';
-import { PageHeaderComponent } from '../../../../shared/components/page-header/page-header.component';
-import { EnumLabelPipe } from '../../../../shared/pipes/enum-label.pipe';
+import { TicketsService } from '../../../../core/services/tickets.service';
+import { ActivosService } from '../../../../core/services/activos.service';
 
+/**
+ * Componente contenedor para el Panel de Control (Dashboard) principal.
+ * Se encarga de precargar todas las métricas operativas de la Mesa de Ayuda
+ * resolviendo múltiples llamadas asíncronas en paralelo.
+ * * @class
+ */
 @Component({
   selector: 'app-dashboard-page',
-  standalone: true,
-  imports: [
-    AsyncPipe,
-    DataPanelComponent,
-    EmptyStateComponent,
-    EnumLabelPipe,
-    LoadingStateComponent,
-    NgStyle,
-    PageHeaderComponent
-  ],
   templateUrl: './dashboard-page.component.html',
-  styleUrl: './dashboard-page.component.css'
+  styleUrls: ['./dashboard-page.component.css']
 })
-export class DashboardPageComponent {
-  private readonly dashboardService = inject(DashboardService);
+export class DashboardPageComponent implements OnInit {
+  /** @public {boolean} Bandera de control para la pantalla de carga (Loading State) */
+  public isLoading: boolean = true;
+  
+  /** @public {any} Almacena las métricas consolidadas (Reemplazar con interfaz estricta en el futuro) */
+  public metricas: any = null;
 
-  readonly vm$ = this.dashboardService.getDashboard();
+  constructor(
+    private readonly dashboardService: DashboardService,
+    private readonly ticketsService: TicketsService,
+    private readonly activosService: ActivosService
+  ) {}
 
-  width(value: number, total: number): string {
-    if (!total) {
-      return '0%';
-    }
-
-    return `${Math.max((value / total) * 100, 6)}%`;
+  /**
+   * Hook del ciclo de vida de Angular. 
+   * Orquesta la carga inicial de datos mediante `forkJoin` para evitar peticiones en cascada.
+   * @override
+   */
+  ngOnInit(): void {
+    this.cargarDataEnParalelo();
   }
 
-  hasBarData(values: Array<{ value: number }>): boolean {
-    return values.some((item) => item.value > 0);
+  /**
+   * Agrupa las peticiones HTTP principales y se suscribe a ellas como una sola unidad.
+   * Garantiza que la bandera `isLoading` solo pase a false cuando TODO haya terminado,
+   * ya sea con éxito o con error, gracias al operador `finalize()`.
+   * * @private
+   */
+  private cargarDataEnParalelo(): void {
+    this.isLoading = true;
+
+    forkJoin({
+      estadisticas: this.dashboardService.getResumen(),
+      ticketsPendientes: this.ticketsService.getTickets({ estado: 'ABIERTO' }),
+      activosCriticos: this.activosService.getActivos({ estado: 'EN_REPARACION' })
+    })
+    .pipe(
+      finalize(() => this.isLoading = false)
+    )
+    .subscribe({
+      next: (respuestas) => {
+        this.metricas = respuestas.estadisticas;
+        // Trampa para Jean: Debe decidir cómo pasar ticketsPendientes al HTML
+      },
+      error: (err) => {
+        console.error('Fallo al inicializar el Dashboard', err);
+        // Trampa para Jean: Implementar un servicio de Notificaciones (Toaster) aquí
+      }
+    });
   }
 }
